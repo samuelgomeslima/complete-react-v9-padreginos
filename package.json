@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,9 @@
     "react": "^19.1.1"
   },
   "devDependencies": {
+    "eslint": "^9.9.1",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
     "prettier": "^3.6.2"
   }
 }

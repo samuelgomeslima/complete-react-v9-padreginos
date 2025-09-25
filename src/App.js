@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const App = () => {
   return React.createElement("div", {}, [
     React.createElement("h1", {}, "Padre Gino's"),
