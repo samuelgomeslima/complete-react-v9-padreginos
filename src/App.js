@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import Pizza from "./Pizza";
 
 /* eslint-disable no-undef */
 const App = () => {
@@ -30,13 +31,6 @@ const App = () => {
       description:
         "A healthy option loaded with fresh vegetables like bell peppers, onions, mushrooms, and olives.",
     }),
-  ]);
-};
-
-const Pizza = (props) => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, props.name),
-    React.createElement("p", {}, props.description),
   ]);
 };
 
