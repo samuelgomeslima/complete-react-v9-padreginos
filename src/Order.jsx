@@ -18,6 +18,7 @@ export default function Order() {
 
   if (!loading) {
     selectedPizza = pizzaTypes.find((pizza) => pizza.id === pizzaType);
+    price = intl.format(selectedPizza?.sizes[pizzaSize]);
   }
 
   async function fetchPizzaTypes() {
@@ -29,7 +30,7 @@ export default function Order() {
 
   useEffect(() => {
     fetchPizzaTypes();
-  }, []);
+  }, [pizzaSize]);
 
   return (
     <div className="order">
@@ -93,12 +94,18 @@ export default function Order() {
           <button type="submit">Add to Cart</button>
         </div>
         <div className="order-pizza">
-          <Pizza
-            name="Pepperoni"
-            description="Mozzarella Cheese, Pepperoni"
-            image="/public/pizzas/pepperoni.webp"
-          />
-          <p>$13.37</p>
+          {
+            loading ? (
+              <p>Loading...</p>
+            ) : (
+              <Pizza
+                name={selectedPizza.name}
+                description={selectedPizza.description}
+                image={selectedPizza.image}
+              />
+            )
+          }
+          <p>{price}</p>
         </div>
       </form>
     </div>
