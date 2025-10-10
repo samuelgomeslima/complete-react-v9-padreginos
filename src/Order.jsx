@@ -1,35 +1,29 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Pizza from "./Pizza";
+import { fetchPizzaTypes, formatPrice, selectPizzaById } from "./orderUtils";
 
-const intl = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
-
-export default function Order() {
+export default function Order({ fetcher } = {}) {
   const [pizzaTypes, setPizzaTypes] = useState([]);
   const [pizzaType, setPizzaType] = useState("pepperoni");
   const [pizzaSize, setPizzaSize] = useState("M");
   const [loading, setLoading] = useState(true);
 
-  let price, selectedPizza;
+  let price;
+  let selectedPizza;
 
   if (!loading) {
-    selectedPizza = pizzaTypes.find((pizza) => pizza.id === pizzaType);
-    price = intl.format(selectedPizza?.sizes[pizzaSize]);
+    selectedPizza = selectPizzaById(pizzaTypes, pizzaType);
+    price = formatPrice(selectedPizza?.sizes[pizzaSize]);
   }
 
-  async function fetchPizzaTypes() {
-    const pizzaRes = await fetch("/api/pizzas");
-    const pizzaJson = await pizzaRes.json();
+  async function loadPizzaTypes() {
+    const pizzaJson = await fetchPizzaTypes(fetcher);
     setPizzaTypes(pizzaJson);
     setLoading(false);
   }
 
   useEffect(() => {
-    fetchPizzaTypes();
+    loadPizzaTypes();
   }, [pizzaSize]);
 
   return (
