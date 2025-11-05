@@ -1,4 +1,5 @@
 import { createLazyFileRoute, Link } from '@tanstack/react-router'
+import { Contact } from '../components/Contact'
 
 export const Route = createLazyFileRoute('/')({
   component: Index,
@@ -18,7 +19,10 @@ function Index() {
         <li>
           <Link to="/past">Past Orders</Link>
         </li>
+        <li>
+          <Contact to="/contact">Contact Us</Contact>
+        </li>
       </ul>
     </div>
-  )
+  );
 }
